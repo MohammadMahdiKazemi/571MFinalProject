@@ -38,7 +38,7 @@ TEST:
   NUM_SPATIAL_CROPS: 3
   CHECKPOINT_FILE_PATH: '/checkpoint/gedas/jobs/timesformer/kinetics_400/TimeSformer_divST_8x32_224/checkpoints/checkpoint_epoch_00025.pyth'
 DATA_LOADER:
-  NUM_WORKERS: 8
+  NUM_WORKERS: 2
   PIN_MEMORY: True
 NUM_GPUS: 8
 NUM_SHARDS: 1

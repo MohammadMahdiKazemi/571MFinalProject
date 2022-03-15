@@ -87,10 +87,13 @@ def train_epoch(
         if cfg.DETECTION.ENABLE:
             preds = model(inputs, meta["boxes"])
         else:
+            #print("model input size", inputs.shape)
             preds = model(inputs)
 
         # Compute the loss.
-        loss = loss_fun(preds, labels)
+        loss = loss_fun(preds.squeeze(), labels.squeeze())
+        print("preds", preds.squeeze())
+        print("labels", labels.squeeze())
 
         if cfg.MIXUP.ENABLED:
             labels = hard_labels
@@ -110,8 +113,9 @@ def train_epoch(
                 optimizer.zero_grad()
             loss.backward()
             if (cur_iter + 1) % num_iters == 0:
-                for p in model.parameters():
-                    p.grad /= num_iters
+                for name, p in model.named_parameters():
+                    if not "head.bias" in name:
+                        p.grad /= num_iters
                 optimizer.step()
                 optimizer.zero_grad()
 
@@ -130,7 +134,7 @@ def train_epoch(
                 )
 
         else:
-            top1_err, top5_err = None, None
+            top1_err, top5_err = torch.tensor([float(1.)]).cuda(), torch.tensor([float(1.)]).cuda()
             if cfg.DATA.MULTI_LABEL:
                 # Gather all the predictions across all the devices.
                 if cfg.NUM_GPUS > 1:
@@ -138,10 +142,7 @@ def train_epoch(
                 loss = loss.item()
             else:
                 # Compute the errors.
-                num_topks_correct = metrics.topks_correct(preds, labels, (1, 5))
-                top1_err, top5_err = [
-                    (1.0 - x / preds.size(0)) * 100.0 for x in num_topks_correct
-                ]
+                loss = loss
                 # Gather all the predictions across all the devices.
                 if cfg.NUM_GPUS > 1:
                     loss, top1_err, top5_err = du.all_reduce(
@@ -151,8 +152,8 @@ def train_epoch(
                 # Copy the stats from GPU to CPU (sync point).
                 loss, top1_err, top5_err = (
                     loss.item(),
-                    top1_err.item(),
-                    top5_err.item(),
+                    loss.item(),
+                    loss.item(),
                 )
 
             # Update and log stats.

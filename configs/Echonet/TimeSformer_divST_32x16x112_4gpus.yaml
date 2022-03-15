@@ -1,0 +1,58 @@
+TRAIN:
+  ENABLE: True
+  DATASET: echonet
+  BATCH_SIZE: 32
+  EVAL_PERIOD: 5
+  CHECKPOINT_PERIOD: 5
+  AUTO_RESUME: True
+DATA:
+  PATH_TO_DATA_DIR: ./path/to/echonet/
+  length: 32
+  SAMPLING_RATE: 32
+  TRAIN_JITTER_SCALES: [256, 320]
+  TRAIN_CROP_SIZE: 112
+  TEST_CROP_SIZE: 112
+  INPUT_CHANNEL_NUM: [3]
+  root: None
+  split: "train"
+  target_type: "EF"
+  mean: [32.260647, 32.223927, 32.203083] 
+  std: [48.50121, 48.47852, 48.446346]
+  period: 2
+  max_length: 250
+  clips: 1
+  pad: None
+  noise: None
+  target_transform: None
+  external_test_location: None
+  NUM_FRAMES: 32
+TIMESFORMER:
+  ATTENTION_TYPE: 'divided_space_time'
+SOLVER:
+  BASE_LR: 0.0001
+  LR_POLICY: steps_with_relative_lrs
+  STEPS: [0, 20, 60]
+  LRS: [1, 0.1, 0.01]
+  MAX_EPOCH: 120
+  MOMENTUM: 0.9
+  WEIGHT_DECAY: 1e-4
+  OPTIMIZING_METHOD: adam
+MODEL:
+  MODEL_NAME: vit_base_patch16_224
+  NUM_CLASSES: 1
+  ARCH: vit
+  LOSS_FUNC: mse_loss
+  DROPOUT_RATE: 0.5
+TEST:
+  ENABLE: True
+  DATASET: echonet
+  BATCH_SIZE: 4
+  NUM_ENSEMBLE_VIEWS: 1
+  NUM_SPATIAL_CROPS: 3
+DATA_LOADER:
+  NUM_WORKERS: 2
+  PIN_MEMORY: True
+NUM_GPUS: 4
+NUM_SHARDS: 1
+RNG_SEED: 0
+OUTPUT_DIR: .

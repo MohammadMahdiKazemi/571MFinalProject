@@ -329,7 +329,8 @@ class vit_base_patch16_224(nn.Module):
         pretrained_model=cfg.TIMESFORMER.PRETRAINED_MODEL
         if self.pretrained:
             load_pretrained(self.model, num_classes=self.model.num_classes, in_chans=kwargs.get('in_chans', 3), filter_fn=_conv_filter, img_size=cfg.DATA.TRAIN_CROP_SIZE, num_patches=self.num_patches, attention_type=self.attention_type, pretrained_model=pretrained_model)
-
+        self.model.head.bias.data[0] = 55.6
+        self.model.head.bias.requires_grad = False
     def forward(self, x):
         x = self.model(x)
         return x

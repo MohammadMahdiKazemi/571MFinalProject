@@ -336,6 +336,21 @@ _C.DATA.ENSEMBLE_METHOD = "sum"
 # If True, revert the default input channel (RBG <-> BGR).
 _C.DATA.REVERSE_INPUT_CHANNEL = False
 
+# Echonet dataloader args
+_C.DATA.length = 32
+_C.DATA.root = None
+_C.DATA.split = "train"
+_C.DATA.target_type = "EF"
+_C.DATA.mean = [32.260647, 32.223927, 32.203083] 
+_C.DATA.std = [48.50121, 48.47852, 48.446346]
+_C.DATA.period = 2
+_C.DATA.max_length = 250
+_C.DATA.clips = 1
+_C.DATA.pad = None
+_C.DATA.noise = None
+_C.DATA.target_transform = None
+_C.DATA.external_test_location = None
+
 ############
 _C.DATA.TEMPORAL_EXTENT = 8
 _C.DATA.DEIT_TRANSFORMS = False
