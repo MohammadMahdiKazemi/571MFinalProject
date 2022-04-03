@@ -143,4 +143,11 @@ dmypy.json
 cython_debug/
 
 checkpoints/*
+outputdirdepth8/*
+outputdirpatch28/*
+outputsdir_original_sgd/*
+outputslog/*
+outputslog_original_sgd/*
+outputslogdirdepth8/*
+scratch/*
 

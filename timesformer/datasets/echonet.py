@@ -168,7 +168,7 @@ class Echonet(torchvision.datasets.VisionDataset):
         super().__init__(root, target_transform=self.cfg.DATA.target_transform)
 
         
-        self.split = self.cfg.DATA.split.upper()
+        self.split = split.upper()
         if not isinstance(self.cfg.DATA.target_type, list):
             target_type = [self.cfg.DATA.target_type]
         self.target_type = target_type

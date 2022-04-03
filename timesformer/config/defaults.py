@@ -619,13 +619,13 @@ _C.TENSORBOARD = CfgNode()
 
 # Log to summary writer, this will automatically.
 # log loss, lr and metrics during train/eval.
-_C.TENSORBOARD.ENABLE = False
+_C.TENSORBOARD.ENABLE = True
 # Provide path to prediction results for visualization.
 # This is a pickle file of [prediction_tensor, label_tensor]
-_C.TENSORBOARD.PREDICTIONS_PATH = ""
+_C.TENSORBOARD.PREDICTIONS_PATH = "/scratch/st-puranga-1/users/MohammadMahdi/Workspace/timesformerM/TimeSformer/outputslog/"
 # Path to directory for tensorboard logs.
 # Default to to cfg.OUTPUT_DIR/runs-{cfg.TRAIN.DATASET}.
-_C.TENSORBOARD.LOG_DIR = ""
+_C.TENSORBOARD.LOG_DIR = "/scratch/st-puranga-1/users/MohammadMahdi/Workspace/timesformerM/TimeSformer/outputslog/"
 # Path to a json file providing class_name - id mapping
 # in the format {"class_name1": id1, "class_name2": id2, ...}.
 # This file must be provided to enable plotting confusion matrix
@@ -664,16 +664,16 @@ _C.TENSORBOARD.HISTOGRAM.FIGSIZE = [8, 8]
 _C.TENSORBOARD.MODEL_VIS = CfgNode()
 
 # If False, skip model visualization.
-_C.TENSORBOARD.MODEL_VIS.ENABLE = False
+_C.TENSORBOARD.MODEL_VIS.ENABLE = True
 
 # If False, skip visualizing model weights.
-_C.TENSORBOARD.MODEL_VIS.MODEL_WEIGHTS = False
+_C.TENSORBOARD.MODEL_VIS.MODEL_WEIGHTS = True
 
 # If False, skip visualizing model activations.
-_C.TENSORBOARD.MODEL_VIS.ACTIVATIONS = False
+_C.TENSORBOARD.MODEL_VIS.ACTIVATIONS = True
 
 # If False, skip visualizing input videos.
-_C.TENSORBOARD.MODEL_VIS.INPUT_VIDEO = False
+_C.TENSORBOARD.MODEL_VIS.INPUT_VIDEO = True
 
 
 # List of strings containing data about layer names and their indexing to

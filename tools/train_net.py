@@ -92,8 +92,8 @@ def train_epoch(
 
         # Compute the loss.
         loss = loss_fun(preds.squeeze(), labels.squeeze())
-        print("preds", preds.squeeze())
-        print("labels", labels.squeeze())
+        #print("preds", preds.squeeze())
+        #print("labels", labels.squeeze())
 
         if cfg.MIXUP.ENABLED:
             labels = hard_labels
@@ -252,17 +252,31 @@ def eval_epoch(val_loader, model, val_meter, cur_epoch, cfg, writer=None):
                     preds, labels = du.all_gather([preds, labels])
             else:
                 # Compute the errors.
-                num_topks_correct = metrics.topks_correct(preds, labels, (1, 5))
+                #num_topks_correct = metrics.topks_correct(preds, labels, (1, 5))
 
                 # Combine the errors across the GPUs.
-                top1_err, top5_err = [
-                    (1.0 - x / preds.size(0)) * 100.0 for x in num_topks_correct
-                ]
+                # top1_err, top5_err = [
+                #     (1.0 - x / preds.size(0)) * 100.0 for x in num_topks_correct
+                # ]
+                loss_fun = losses.get_loss_func(cfg.MODEL.LOSS_FUNC)(reduction="mean")
+                loss = loss_fun(preds.squeeze(), labels.squeeze())
                 if cfg.NUM_GPUS > 1:
-                    top1_err, top5_err = du.all_reduce([top1_err, top5_err])
+                    loss, top1_err, top5_err = du.all_reduce(
+                        [loss, loss, loss]
+                    )
+
+                # Copy the stats from GPU to CPU (sync point).
+                loss, top1_err, top5_err = (
+                    loss.item(),
+                    loss.item(),
+                    loss.item(),
+                )
+
+                # if cfg.NUM_GPUS > 1:
+                #     top1_err, top5_err = du.all_reduce([top1_err, top5_err])
 
                 # Copy the errors from GPU to CPU (sync point).
-                top1_err, top5_err = top1_err.item(), top5_err.item()
+                # top1_err, top5_err = top1_err.item(), top5_err.item()
 
                 val_meter.iter_toc()
                 # Update and log stats.
@@ -305,7 +319,8 @@ def eval_epoch(val_loader, model, val_meter, cur_epoch, cfg, writer=None):
             writer.plot_eval(
                 preds=all_preds, labels=all_labels, global_step=cur_epoch
             )
-
+            np.save("/scratch/st-puranga-1/users/MohammadMahdi/Workspace/timesformerM/TimeSformer/outputslog/preds{}.npy".format(cur_iter), all_preds)
+            np.save("/scratch/st-puranga-1/users/MohammadMahdi/Workspace/timesformerM/TimeSformer/outputslog/labels{}.npy".format(cur_iter), all_labels)
     val_meter.reset()
 
 
@@ -434,6 +449,8 @@ def train(cfg):
 
     train_meter = TrainMeter(len(train_loader), cfg)
     val_meter = ValMeter(len(val_loader), cfg)
+    print("len val LOADER!",len(val_loader))
+    print("len train LOADER!",len(train_loader))
 
     # set up writer for logging to Tensorboard format.
     if cfg.TENSORBOARD.ENABLE and du.is_master_proc(
