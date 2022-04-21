@@ -68,10 +68,8 @@ Training the default TimeSformer that uses divided space-time attention, and ope
 
 ```
 python tools/run_net.py \
-  --cfg configs/Kinetics/TimeSformer_divST_8x32_224.yaml \
-  DATA.PATH_TO_DATA_DIR path_to_your_dataset \
-  NUM_GPUS 8 \
-  TRAIN.BATCH_SIZE 8 \
+  --cfg configs/Echo/TimeSformer_divST_echonet_16_112_112.yaml\
+  TRAIN.ENABLE True \
 ```
 You may need to pass location of your dataset in the command line by adding `DATA.PATH_TO_DATA_DIR path_to_your_dataset`, or you can simply add
 
