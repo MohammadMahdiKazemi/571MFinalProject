@@ -8,6 +8,12 @@ Estimating Ejection Fraction from Echocardiograms) for  571F course.
 Here is the visualization of attention layers learned by model
 
 ![](Visualisation/hstack.png)
+
+<p float="left">
+  <img src="/Visualisation/video0.95.gif" width="100" />
+  <img src="/Visualisation/video3.gif" width="100" /> 
+  <img src="/Visualisation/video4.gif" width="100" />
+</p>
 ![](Visualisation/video0.95.gif) ![](Visualisation/video3.gif) ![](Visualisation/video4.gif)
 
 # Loading the Model
