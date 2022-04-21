@@ -5,7 +5,11 @@ Estimating Ejection Fraction from Echocardiograms) for  571F course.
 
 # Visualization of heatmap
 
+Here is the visualization of attention layers learned by model
+
 ![](Visualisation/video0.95.gif)
+![](Visualisation/video3.gif)
+![](Visualisation/video4.gif)
 
 # Loading the Model
 
