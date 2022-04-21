@@ -3,6 +3,10 @@
 This is an official pytorch implementation of our Project (A Transformer-based video analysis framework for
 Estimating Ejection Fraction from Echocardiograms) for  571F course.
 
+# Visualization of heatmap
+
+![](name-of-giphy.gif)
+
 # Loading the Model
 
 
