@@ -10,9 +10,9 @@ Here is the visualization of attention layers learned by model
 ![](Visualisation/hstack.png)
 
 <p float="left">
-  <img src="/Visualisation/video0.95.gif" width="100" />
-  <img src="/Visualisation/video3.gif" width="100" /> 
-  <img src="/Visualisation/video4.gif" width="100" />
+  <img src="/Visualisation/video0.95.gif" width="300" />
+  <img src="/Visualisation/video3.gif" width="300" /> 
+  <img src="/Visualisation/video4.gif" width="300" />
 </p>
 
 
