@@ -14,7 +14,7 @@ Here is the visualization of attention layers learned by model
   <img src="/Visualisation/video3.gif" width="100" /> 
   <img src="/Visualisation/video4.gif" width="100" />
 </p>
-![](Visualisation/video0.95.gif) ![](Visualisation/video3.gif) ![](Visualisation/video4.gif)
+
 
 # Loading the Model
 
