@@ -89,8 +89,10 @@ If you want to use a smaller number of GPUs, you need to modify .yaml configurat
 
 Use `TRAIN.ENABLE` and `TEST.ENABLE` to control whether training or testing is required for a given run. When testing, you also have to provide the path to the checkpoint model via TEST.CHECKPOINT_FILE_PATH.
 ```
+
+  
 python tools/run_net.py \
-  --cfg configs/Kinetics/TimeSformer_divST_8x32_224_TEST.yaml \
+  --cfg configs/Echo/TimeSformer_divST_echonet_16_112_112_test.yaml\
   DATA.PATH_TO_DATA_DIR path_to_your_dataset \
   TEST.CHECKPOINT_FILE_PATH path_to_your_checkpoint \
   TRAIN.ENABLE False \
