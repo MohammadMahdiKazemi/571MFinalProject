@@ -5,7 +5,7 @@ Estimating Ejection Fraction from Echocardiograms) for  571F course.
 
 # Visualization of heatmap
 
-![](name-of-giphy.gif)
+![](Visoulization/video0.95.gif)
 
 # Loading the Model
 
